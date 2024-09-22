@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using MonoMod.Utils;
@@ -23,7 +23,7 @@ namespace BepInEx
 			BepInExRootPath = bepinRootPath ?? Path.Combine(GameRootPath, "BepInEx");
 			ConfigPath = Path.Combine(BepInExRootPath, "config");
 			BepInExConfigPath = Path.Combine(ConfigPath, "BepInEx.cfg");
-			PluginPath = Path.Combine(BepInExRootPath, "plugins");
+			SetPluginPath(null);
 			PatcherPluginPath = Path.Combine(BepInExRootPath, "patchers");
 			BepInExAssemblyDirectory = Path.Combine(BepInExRootPath, "core");
 			BepInExAssemblyPath = Path.Combine(BepInExAssemblyDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.dll");
@@ -38,9 +38,9 @@ namespace BepInEx
 			ManagedPath = managedPath;
 		}
 
-		internal static void SetPluginPath(string pluginPath)
+		internal static void SetPluginPath(string _)
 		{
-			PluginPath = Utility.CombinePaths(BepInExRootPath, pluginPath);
+			PluginPath = Utility.CombinePaths(GameRootPath, "Modding", "plugins");
 		}
 
 		/// <summary>
